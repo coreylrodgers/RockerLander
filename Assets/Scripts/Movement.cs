@@ -6,6 +6,8 @@ public class Movement : MonoBehaviour
 {
     Rigidbody rb;
 
+    AudioSource audio;
+
     [SerializeField]
     float mainThrust = 100;
 
@@ -16,6 +18,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+            PlaySFX();
+        }
+        else
+        {
+            StopSFX();
         }
     }
 
@@ -37,7 +45,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(rotatationThrust);
+            ApplyRotation (rotatationThrust);
         }
         else if (Input.GetKey(KeyCode.D))
         {
@@ -47,13 +55,27 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(float rotationThisFrame)
     {
-
         //freeze rotation so we can manually rotate
         rb.freezeRotation = true;
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
 
-
-       //unfreeze to allow physics to kick back in
+        //unfreeze to allow physics to kick back in
         rb.freezeRotation = false;
+    }
+
+    void PlaySFX()
+    {
+        if (!audio.isPlaying)
+        {
+            audio.Play();
+        }
+    }
+
+    void StopSFX()
+    {
+        if (audio.isPlaying)
+        {
+            audio.Stop();
+        }
     }
 }
