@@ -26,4 +26,12 @@ public class CollisionHandler : MonoBehaviour
     void Respawn() {
      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+            case "Player":
+                Debug.Log("Hit an obstacle");
+                  break;
+            default:
+                Debug.Log("Hit an obstacle");
+                  break;
+        }
+    }
 }
