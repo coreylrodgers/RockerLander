@@ -3,6 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+
+
+private int currentSceneIndex;
+    
+    void Start()
+    {
+         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -14,7 +23,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Hit fuel");
                 break;
             case "Finish":
-                Debug.Log("Congrats");
+                NextLevel();
                 break;
             default:
                 Debug.Log("Hit an obstacle");
@@ -25,7 +34,11 @@ public class CollisionHandler : MonoBehaviour
 
     void Respawn()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene (currentSceneIndex);
+    }
+
+    void NextLevel()
+    {
+        SceneManager.LoadScene(currentSceneIndex + 1);
     }
 }

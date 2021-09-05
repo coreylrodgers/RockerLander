@@ -7,8 +7,6 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     AudioSource audio;
 
-    AudioSource audio;
-
     [SerializeField]
     float mainThrust = 100;
 
@@ -20,6 +18,10 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audio = gameObject.GetComponent<AudioSource>();
+
+
+        //set audio to 50 percent
+        audio.volume = 0.4f;
     }
 
     // Update is called once per frame
