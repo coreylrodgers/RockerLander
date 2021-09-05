@@ -13,6 +13,12 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField]
     AudioClip crash;
 
+    [SerializeField]
+    ParticleSystem successParticles;
+
+    [SerializeField]
+    ParticleSystem crashParticles;
+
     //state
     private int currentSceneIndex;
 
@@ -77,8 +83,10 @@ public class CollisionHandler : MonoBehaviour
     void Crash()
     {
         isTransitioning = true;
+
         audioSource.Stop();
         audioSource.PlayOneShot (crash);
+        crashParticles.Play();
 
         //disable movement
         GetComponent<Movement>().enabled = false;
@@ -92,7 +100,10 @@ public class CollisionHandler : MonoBehaviour
     {
         isTransitioning = true;
         audioSource.Stop();
+
         audioSource.PlayOneShot (success);
+
+        successParticles.Play();
 
         //disable movement
         GetComponent<Movement>().enabled = false;

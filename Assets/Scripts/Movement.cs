@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
- //params - tuning
- //cache - 
- //state (private)
+    //params - tuning
+    //cache -
+    //state (private)
+    [SerializeField]
+    float mainThrust = 100;
 
-    [SerializeField] float mainThrust = 100;
-    [SerializeField] float rotatationThrust = 100;
-    [SerializeField] AudioClip mainEngine;
+    [SerializeField]
+    float rotatationThrust = 100;
+
+    [SerializeField]
+    AudioClip mainEngine;
+
+    [SerializeField]
+    ParticleSystem jet;
+
+    [SerializeField]
+    ParticleSystem leftThrustParticles;
+
+    [SerializeField]
+    ParticleSystem rightThrustParticles;
 
     Rigidbody rb;
+
     AudioSource audio;
 
     // Start is called before the first frame update
@@ -20,7 +34,6 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audio = gameObject.GetComponent<AudioSource>();
-
 
         //set audio to 50 percent
         audio.volume = 0.4f;
@@ -39,6 +52,11 @@ public class Movement : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
             PlaySFX();
+
+            if(!jet.isPlaying) {
+                jet.Play();
+            }
+           
         }
         else
         {
@@ -50,10 +68,12 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
+            leftThrustParticles.Play();
             ApplyRotation (rotatationThrust);
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            rightThrustParticles.Play();
             ApplyRotation(-rotatationThrust);
         }
     }
