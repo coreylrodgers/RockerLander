@@ -417,23 +417,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a8848fbc8f56b441a083bc0bedf6fba, type: 3}
---- !u!1 &1818083792 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1252037987639582527, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
-  m_PrefabInstance: {fileID: 5261717012892547015}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1818083801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818083792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d997bc5e2ce10c469c27079d2281389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1459499784166179841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -498,6 +481,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 958846795, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
+      propertyPath: mainEngine
+      value: 
+      objectReference: {fileID: 8300000, guid: b77da1473fa5e904798ea8194d9e13ea, type: 3}
     - target: {fileID: 958846800, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
       propertyPath: m_Constraints
       value: 120
@@ -682,6 +669,14 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].outWeight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1818083801, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
+      propertyPath: crash
+      value: 
+      objectReference: {fileID: 8300000, guid: 92ca939d724a6ee4fb31890d6e340646, type: 3}
+    - target: {fileID: 1818083801, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
+      propertyPath: success
+      value: 
+      objectReference: {fileID: 8300000, guid: f9f2fb31e45065941a996820ef831234, type: 3}
     - target: {fileID: 1252037987639582527, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
       propertyPath: m_Name
       value: Rocket
@@ -696,7 +691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8976741212422499051, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.52
+      value: 5.85
       objectReference: {fileID: 0}
     - target: {fileID: 8976741212422499051, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -730,7 +725,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7516987833378912248, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 658fba84b78172f4ca31b6f3d51761e5, type: 3}
 --- !u!1001 &5360259306246540577
 PrefabInstance:

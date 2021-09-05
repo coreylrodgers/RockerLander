@@ -3,17 +3,39 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    //params
+    //cache
+    AudioSource audioSource;
 
+    [SerializeField]
+    AudioClip success;
 
-private int currentSceneIndex;
-    
+    [SerializeField]
+    AudioClip crash;
+
+    //state
+    private int currentSceneIndex;
+
+    //state
+    bool isTransitioning = false;
+
+    [SerializeField]
+    private float levelLoadDelay = 1;
+
     void Start()
     {
-         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //init audio
+        audioSource = GetComponent<AudioSource>();
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning)
+        {
+            return;
+        }
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -23,13 +45,14 @@ private int currentSceneIndex;
                 Debug.Log("Hit fuel");
                 break;
             case "Finish":
-                NextLevel();
+                StartSuccessSequence();
                 break;
             default:
                 Debug.Log("Hit an obstacle");
-                Respawn();
+                Crash();
                 break;
         }
+        isTransitioning = false;
     }
 
     void Respawn()
@@ -39,6 +62,43 @@ private int currentSceneIndex;
 
     void NextLevel()
     {
-        SceneManager.LoadScene(currentSceneIndex + 1);
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        else
+        {
+            SceneManager.LoadScene (nextSceneIndex);
+        }
+    }
+
+    void Crash()
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot (crash);
+
+        //disable movement
+        GetComponent<Movement>().enabled = false;
+
+        //TODO      //Activate crash sound + particles
+        //respawn
+        Invoke("Respawn", levelLoadDelay);
+    }
+
+    void StartSuccessSequence()
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot (success);
+
+        //disable movement
+        GetComponent<Movement>().enabled = false;
+
+        //TODO      //Activate crash sound + particles
+        //respawn
+        Invoke("NextLevel", levelLoadDelay);
     }
 }
