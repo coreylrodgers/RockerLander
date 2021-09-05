@@ -12,26 +12,20 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case "Fuel":
                 Debug.Log("Hit fuel");
-                  break;
+                break;
             case "Finish":
                 Debug.Log("Congrats");
-                  break;
+                break;
             default:
                 Debug.Log("Hit an obstacle");
-           Respawn();
-                  break;
+                Respawn();
+                break;
         }
     }
 
-    void Respawn() {
-     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-            case "Player":
-                Debug.Log("Hit an obstacle");
-                  break;
-            default:
-                Debug.Log("Hit an obstacle");
-                  break;
-        }
+    void Respawn()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene (currentSceneIndex);
     }
 }
